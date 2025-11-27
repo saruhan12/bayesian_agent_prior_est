@@ -54,16 +54,16 @@ print("Loaded prior mean estimate (μ0):", mu0_est)
 mu0_est = -0.8161      # <-- update this if you re-estimate μ0
 
 # S1 sweep around prior mean
-S1_MIN_OFFSET = -4.0
-S1_MAX_OFFSET =  4.0
-S1_STEP        =  0.25
+s1_min_offset = -4.0
+s1_max_offset =  4.0
+s1_step        =  0.25
 
-s1_min = mu0_est + S1_MIN_OFFSET
-s1_max = mu0_est + S1_MAX_OFFSET
+s1_min = mu0_est + s1_min_offset
+s1_max = mu0_est + s1_max_offset
 
 # Reference stimulus: fixed at prior mean, almost noiseless
-S2_VAL = mu0_est
-S2_STD = 0.05          # very precise ref → posterior var ~ 0
+s2_val = mu0_est
+s2_std = 0.05          # very precise ref → posterior var ~ 0
 
 # ---- S1 noise levels ----
 # C: drop extremely low-noise blocks → no std < 0.7
@@ -78,36 +78,36 @@ dense_prior = np.geomspace(1.5, 3.3, num=20)
 # a few very noisy levels to see asymptote more clearly
 high = np.geomspace(4.5, 8.0, num=5)
 
-S1_STD_SERIES = np.unique(np.concatenate([low_mid, dense_prior, high]))
-S1_STD_SERIES.sort()
+s1_std_series = np.unique(np.concatenate([low_mid, dense_prior, high]))
+s1_std_series.sort()
 
 # B: increase trials per S1/S1_std condition
-TRIALS_PER_S1 = 120        # more trials → tighter slope estimates
+trials_per_s1 = 120        # more trials → tighter slope estimates
 
-SHUFFLE_WITHIN_BLOCK = True
+shuffle_within_block = True
 RNG = np.random.default_rng(42)
 
 # =====================================
 # BUILD DESIGN
 # =====================================
 
-s1_values = np.arange(s1_min, s1_max + 1e-9, S1_STEP)
+s1_values = np.arange(s1_min, s1_max + 1e-9, s1_step)
 
 rows = []
-for s1_std in S1_STD_SERIES:
+for s1_std in s1_std_series:
     for s1_val in s1_values:
-        for _ in range(TRIALS_PER_S1):
+        for _ in range(trials_per_s1):
             rows.append({
                 "S1_val": float(s1_val),
                 "S1_std": float(s1_std),
-                "S2_val": float(S2_VAL),
-                "S2_std": float(S2_STD),
+                "S2_val": float(s2_val),
+                "S2_std": float(s2_std),
             })
 
 df = pd.DataFrame(rows)
 
 # Optional: shuffle within each S1_std block
-if SHUFFLE_WITHIN_BLOCK:
+if shuffle_within_block:
     df = (
         df.groupby("S1_std", group_keys=False)
           .apply(lambda g: g.sample(frac=1, random_state=42))
@@ -124,8 +124,8 @@ df.insert(0, "Trial", np.arange(1, len(df) + 1))
 df.to_csv(output_filename, index=False)
 print(df.head())
 print("\nSaved design to:", output_filename)
-print("S1_std levels:", S1_STD_SERIES)
-print("Number of S1_std levels:", len(S1_STD_SERIES))
+print("S1_std levels:", s1_std_series)
+print("Number of S1_std levels:", len(s1_std_series))
 print("Total trials:", len(df))
 
 #TODO
