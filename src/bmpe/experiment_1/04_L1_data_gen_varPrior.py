@@ -51,7 +51,6 @@ output_filename = os.path.join(folder, file_name_output)
 # Plug in your current prior-mean estimate from the mean experiment
 mu0_est = np.load(input_filename)
 print("Loaded prior mean estimate (μ0):", mu0_est)
-mu0_est = -0.8161      # <-- update this if you re-estimate μ0
 
 # S1 sweep around prior mean
 s1_min_offset = -4.0
