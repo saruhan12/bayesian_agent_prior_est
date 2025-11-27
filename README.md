@@ -16,25 +16,29 @@ src/
 ├── bmpe/
 │   ├── utils.py
 │   ├── experiment_1/
-│   │   ├── 01_L1_data_gen_meanPrior.py     # generates simulated data for the mean-prior estimates
-│   │   ├── 02_L1_concat_mean.py            # concatenates output from website
-│   │   ├── 03_L1_get_mean_estimate.py      # computes the mean estimate from psychometric fit using probit
-│   │   ├── 04_L1_data_gen_varPrior.py      # generates data for variance-prior estimation
-│   │   └── 05_L1_concat_var.py             # concatenates variance estimation outputs from website
+│   │   ├── 01_L1_data_gen_meanPrior.py        # generates simulated data for the mean-prior estimates
+│   │   ├── 02_L1_concat_mean.py               # concatenates output from website
+│   │   ├── 03_L1_get_mean_estimate.py         # computes the mean estimate from psychometric fit using probit
+│   │   ├── 04_L1_data_gen_varPrior.py         # generates data for variance-prior estimation
+│   │   └── 05_L1_concat_var.py                # concatenates variance estimation outputs from website
 │   ├── level_2/
 │   │   └── 01_L2_data_gen_meanPrior.py
+│   └── __pycache__/                           # python bytecode (ignored)
+└── BMPE.egg-info/                              # auto-generated when package is installed
 
 ## Data Folders
 data/
 ├── experiment_1/
-│   ├── website_input/      # Stimuli / settings fed to the online experiment
+│   ├── website_input/               # Stimuli / settings fed to the online experiment
 │   │   ├── mean/
 │   │   └── variance/
-│   └── website_output/     # Downloaded results from the experiment
-│       ├── raw/            # Raw CSVs, as downloaded; never modified
-│       └── processed/      # Cleaned or aggregated data
+│   └── website_output/              # Downloaded results from participants
+│       ├── raw/                     # Raw CSVs, exactly as downloaded; never modified
+│       └── processed/               # Cleaned or aggregated data ready for analysis
 │
-├── level_2/                # Data for level-2 experiments
+└── level_2/                         # Data for level-2 experiments
+
+
 
 ## Authors:
 Sarush & Jay & Rowan & Cami (in no particular order)
