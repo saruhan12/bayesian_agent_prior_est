@@ -1,27 +1,42 @@
 # Is the agent Bayesian? How?
-This repo contains the experiments we conducted for our Bayesian Modeling of Brain and Behavior Course project. Our task consisted in -----, which could be assessed at 5 different levels of difficulty.
+This repo contains the experiments we conducted for our Bayesian Modeling of Brain and Behavior Course project. Our task consisted in estimate different hidden cognitive variables of simulated bayesian agents. We had to estimate a different set of variables for each of the 5 proposed levels of difficulty. 
 
 ## How to use?
 Clone the repository
 uv sync to create virtual environment from pyproject.toml
 
-run files in experiment_1 in order, respecting the stops to upload and download data from the website. Then refer to the notebook for step by step explanation.
+run files in level 1 in order, respecting the stops to upload and download data from the website. Then refer to the notebook for step by step explanation.
 
-I think I'm mixing up the names experiment and level in some parts. i'll come back to that later.
+similarly, for level 2, level 3, level 4,...
+
+*I think I'm mixing up the names experiment and level in some parts. i'll come back to that later.
 
 ## Src
-- data_gen contains the code to generate --- 
-- notebooks contains explanation notebooks of the experiments for the corresponding level (1 to 5). One notebook per level
-Run tests from the notebook, make sure to change the mean/variance psychometric data location, 
+src/
+├── bmpe/
+│   ├── utils.py
+│   ├── experiment_1/
+│   │   ├── 01_L1_data_gen_meanPrior.py     # generates simulated data for the mean-prior estimates
+│   │   ├── 02_L1_concat_mean.py            # concatenates output from website
+│   │   ├── 03_L1_get_mean_estimate.py      # computes the mean estimate from psychometric fit using probit
+│   │   ├── 04_L1_data_gen_varPrior.py      # generates data for variance-prior estimation
+│   │   └── 05_L1_concat_var.py             # concatenates variance estimation outputs from website
+│   ├── level_2/
+│   │   └── 01_L2_data_gen_meanPrior.py
 
 ## Data Folders
-- test/lvl*/lvl*_mean: output of data_gen_meanPrior.py 
-- test/lvl*/lvl*_var: output of data_gen_varPrior.py
-- ex_data/lvl*/lvl*_mean: output of the experiments for the mean estimation
-- ex_data/lvl*/lvl*_var: output of the experiments for the var estimation
-- combined_psychometric/lvl*/*: output of concat_*.py which outs the required .csv for psychometric 
+data/
+├── experiment_1/
+│   ├── website_input/      # Stimuli / settings fed to the online experiment
+│   │   ├── mean/
+│   │   └── variance/
+│   └── website_output/     # Downloaded results from the experiment
+│       ├── raw/            # Raw CSVs, as downloaded; never modified
+│       └── processed/      # Cleaned or aggregated data
+│
+├── level_2/                # Data for level-2 experiments
 
 ## Authors:
-Sarush & Jay & Rowan & Cami
+Sarush & Jay & Rowan & Cami (in no particular order)
 
 
