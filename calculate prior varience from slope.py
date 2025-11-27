@@ -1,4 +1,3 @@
-
 from math import sqrt
 
 def calculate_prior_variance(sigma_d: float, sigma_s1: float, sigma_s2: float, noise_std: float = 0.35) -> float:
