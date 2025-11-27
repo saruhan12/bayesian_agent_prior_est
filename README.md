@@ -18,6 +18,6 @@ Run tests from the notebook, make sure to change the mean/variance psychometric 
 - combined_psychometric/lvl*/*: output of concat_*.py which outs the required .csv for psychometric 
 
 ## Authors:
-Sarush, Jay, Rowan & Cami
+Sarush & Jay & Rowan & Cami
 
 
