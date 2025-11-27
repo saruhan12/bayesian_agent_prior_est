@@ -47,6 +47,7 @@ folder_input = os.path.join(
 
 pattern = os.path.join(folder_input, input_pattern)
 files = glob.glob(pattern)
+print(pattern)
 
 folder_output = os.path.join(
     data_dir, 
@@ -61,17 +62,12 @@ output_file = os.path.join(folder_output, output_file_name)
 # ==========================================
 # CONFIG
 # ==========================================
-INPUT_DIR = "test/lvl1_var/test8"
-INPUT_PATTERN = "experiment_results-*.csv"
-
-OUTPUT_TRIALS = "combined_trials_var.csv"          # all raw trials
-OUTPUT_PSYCHO = "combined_psychometric_data_var_08.csv"    # binned psychometric
 
 # ==========================================
 # FIND AND LOAD ALL EXPERIMENT FILES
 # ==========================================
-pattern = os.path.join(INPUT_DIR, INPUT_PATTERN)
-files = glob.glob(pattern)
+#pattern = os.path.join(INPUT_DIR, INPUT_PATTERN)
+#files = glob.glob(pattern)
 
 if len(files) == 0:
     raise FileNotFoundError(f"No files matching {pattern!r} found.")
@@ -123,12 +119,6 @@ df = pd.concat(df_list, ignore_index=True)
 print(f"[INFO] Loaded {len(df)} total trials from {len(df_list)} files.")
 
 # ==========================================
-# SAVE RAW TRIALS
-# ==========================================
-df.to_csv(OUTPUT_TRIALS, index=False)
-print(f"[INFO] Saved all combined raw trials -> {OUTPUT_TRIALS}")
-
-# ==========================================
 # SANITY CHECKS
 # ==========================================
 print("\n[INFO] Unique S2_val (should be a single value near μ0):", df["S2_val"].unique())
@@ -160,8 +150,8 @@ grouped = grouped.sort_values(["S1_std", "S1_val"]).reset_index(drop=True)
 # ==========================================
 # SAVE PSYCHOMETRIC DATA
 # ==========================================
-grouped.to_csv(OUTPUT_PSYCHO, index=False)
+grouped.to_csv(output_file, index=False)
 
-print("\n[INFO] Saved psychometric data ->", OUTPUT_PSYCHO)
+print("\n[INFO] Saved psychometric data ->", output_file)
 print(grouped.head())
 print("\n[INFO] Unique S1_std levels:", sorted(grouped["S1_std"].unique()))
