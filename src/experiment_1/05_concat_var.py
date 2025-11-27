@@ -2,8 +2,62 @@ import pandas as pd
 import glob
 import os
 
-## Input is the results of website experiment
+## Input for this is the results of website experiment
 
+# To run this, the output of 01_data_gen_meanPrior.py must be available. It has to be uploaded to the website and the results downloaded. Results should be saved in the folder corresponding to the variable. In this case, the variable is variance
+"data/experiment_1/website_output/raw/variance"
+
+# add test number with following nomenclature:
+# test = f"test{n}"
+
+# were n is the test number
+"data/experiment_1/website_output/raw/variance/test{n}"
+
+# For example, for test 10, the path is
+"data/experiment_1/website_output/raw/variance/test10"
+
+# ==========================================
+# CONFIG
+# ==========================================
+data_dir = "data"
+experiment_name = "experiment_1"
+source_of_data = "website_output"
+
+type_of_data_input = "raw"
+type_of_var = "variance"
+test_n = 8
+test = f"test{test_n}"
+input_pattern = "experiment_results-*.csv"
+
+type_of_data_output = "processed"
+output_file_name = "variance_outputs_experiment_1.csv"
+
+# ==========================================
+# FIND AND LOAD ALL EXPERIMENT FILES
+# ==========================================
+
+folder_input = os.path.join(
+    data_dir, 
+    experiment_name, 
+    source_of_data, 
+    type_of_data_input, 
+    type_of_var,
+    test
+)
+
+pattern = os.path.join(folder_input, input_pattern)
+files = glob.glob(pattern)
+
+folder_output = os.path.join(
+    data_dir, 
+    experiment_name, 
+    source_of_data, 
+    type_of_data_output, 
+    type_of_var,
+    test
+)
+
+output_file = os.path.join(folder_output, output_file_name)
 # ==========================================
 # CONFIG
 # ==========================================
