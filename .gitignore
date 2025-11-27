@@ -8,3 +8,5 @@ __pycache__/
 *.log        
 .venv/
 .__pycache__
+.BMPE.egg-info
+.python-version
